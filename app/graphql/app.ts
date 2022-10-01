@@ -1,10 +1,10 @@
 import { createApplication } from "graphql-modules";
+// graphql modules
 import records from "./queries/records";
 import foo from "./queries/foo";
 
-const app = createApplication({
-  // make sure all module instances load once
-  modules: Array.from(new Set([...records, ...foo])),
-});
+// make sure all module instances load once
+const modules = Array.from(new Set([...records, ...foo]));
+const app = createApplication({ modules });
 
 export default app;
