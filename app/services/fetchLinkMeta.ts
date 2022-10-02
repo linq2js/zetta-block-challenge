@@ -20,7 +20,10 @@ const fetchLinkMeta = (
 
   if (cacheItem) return cacheItem;
 
-  cacheItem = unfurl(url).then((meta) => ({ url, title: meta.title ?? "" }));
+  cacheItem = unfurl(url)
+    .then((meta) => ({ url, title: meta.title ?? "" }))
+    // handle network error or the website cannot reach
+    .catch(() => ({ url, title: "" }));
 
   if (cache) {
     cache.set(url, cacheItem);
